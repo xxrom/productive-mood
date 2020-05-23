@@ -3,12 +3,11 @@ import React, { memo, useState, useCallback } from 'react';
 const PLAY = 'PLAY';
 const STOP = 'STOP';
 
-const Controls = () => {
+const Controls = memo(() => {
   const [state, setState] = useState(PLAY);
 
   const onPlay = useCallback(() => {
     setState(PLAY);
-    setState(STOP);
   }, []);
 
   const onStop = useCallback(() => {
@@ -21,6 +20,6 @@ const Controls = () => {
     <button onClick={onStop}>Stop</button>
     <button>Volume</button>
   </div>);
-};
+});
 
 export { Controls };
