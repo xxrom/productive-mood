@@ -45,6 +45,17 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(webm)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            // options: {
+            //   publicPath: 'assets',
+            // },
+          },
+        ],
+      },
     ]
   },
   resolve: {

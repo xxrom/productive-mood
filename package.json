@@ -7,9 +7,10 @@
     "delay": "1"
   },
   "scripts": {
-    "dev": "yarn build && webpack-dev-server",
+    "dev": "yarn clean && yarn build && webpack-dev-server",
     "build": "webpack",
-    "webpack:watch": "nodemon ./webpack.config.js --exec 'yarn build' --watch ./webpack.config.js --watch ./.babelrc.js"
+    "webpack:watch": "nodemon ./webpack.config.js --exec 'yarn build' --watch ./webpack.config.js --watch ./.babelrc.js",
+    "clean": "rm -rf ./dist"
   },
   "dependencies": {
     "@hot-loader/react-dom": "^16.13.0",
@@ -24,6 +25,7 @@
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
     "html-webpack-template": "^6.2.0",
     "mini-css-extract-plugin": "^0.9.0",

@@ -4,8 +4,11 @@ import { hot } from 'react-hot-loader/root';
 import { Background } from './Background';
 import { Controls } from './Controls';
 
-const App = memo(() => <Background>
-  <Controls />
-</Background>);
+const App = memo(() => {
+  return (
+    <Background>
+      <Controls />
+    </Background>);
+});
 
 export default hot(App);
