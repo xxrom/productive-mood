@@ -5,13 +5,23 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const port = 3001;
 
+const isDev = process.env.NODE_ENV !== 'production';
+
+console.log(`MODE: ${isDev ? 'Development' : 'Production'}`);
+
 module.exports = {
+  mode: isDev ? "development" : "production",
+  devtool: isDev ? 'eval' : 'source-map',
   entry: [
     `webpack-dev-server/client?http://0.0.0.0:${port}`, // WebpackDevServer host and port
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
     "./src/index.js",
   ],
-  mode: "development",
+  output: {
+    path: path.resolve(__dirname, "dist/"),
+    publicPath: "/",
+    filename: 'bundle.js',
+  },
   module: {
     rules: [
       {
@@ -24,7 +34,7 @@ module.exports = {
           options: {
             sourceMap: false,
             cacheDirectory: '.linaria-cache',
-            sourceMap: process.env.NODE_ENV !== 'production',
+            sourceMap: isDev,
           },
         }]
       },
@@ -34,13 +44,13 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: process.env.NODE_ENV !== 'production',
+              hmr: isDev,
             },
           },
           {
             loader: 'css-loader',
             options: {
-              sourceMap: process.env.NODE_ENV !== 'production',
+              sourceMap: isDev,
             },
           },
         ],
@@ -50,9 +60,6 @@ module.exports = {
         use: [
           {
             loader: 'file-loader',
-            // options: {
-            //   publicPath: 'assets',
-            // },
           },
         ],
       },
@@ -65,11 +72,7 @@ module.exports = {
       react: path.resolve(__dirname, 'node_modules/react'),
     },
   },
-  output: {
-    path: path.resolve(__dirname, "dist/"),
-    publicPath: "/dist/",
-    filename: "bundle.js"
-  },
+
   devServer: {
     port,
     publicPath: `http://localhost:${port}/dist/`,
@@ -80,6 +83,7 @@ module.exports = {
   },
   optimization: {
     noEmitOnErrors: true,
+    minimize: !isDev
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -97,7 +101,7 @@ module.exports = {
 </head>
 <body style='margin: 0'>
   <div id="root"></div>
-  <script src="/dist/bundle.js"></script>
+  <script src="/bundle.js"></script>
 </body>
 </html>
 `

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "yarn clean && yarn build && webpack-dev-server",
-    "build": "webpack",
+    "build": "yarn clean && NODE_ENV=production webpack",
     "webpack:watch": "nodemon ./webpack.config.js --exec 'yarn build' --watch ./webpack.config.js --watch ./.babelrc.js",
     "clean": "rm -rf ./dist"
   },
