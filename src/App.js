@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo, useState } from 'react';
 import { hot } from 'react-hot-loader/root';
 
-const App = () => <div>
-  background
-  <button>Play</button>
-  <button>Stop</button>
-  <button>Volume</button>
-</div>;
+import { Background } from './Background';
+import { Controls } from './Controls';
+
+const App = memo(() => <Background>
+  <Controls />
+</Background>);
 
 export default hot(App);
